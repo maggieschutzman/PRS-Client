@@ -1,1 +1,46 @@
-<p>user-detail works!</p>
+<div class='component-content'>
+  <div class=''>
+    <div class='lefthalf'>
+      <span class='component-title'>[{{title}}]</span>
+    </div>
+  </div>
+  <table class="table table-sm" *ngIf='user'>
+    <tr>
+      <td>User Name</td>
+      <td>{{ user.username }}</td>
+    </tr>
+    <tr>
+      <td>FirstName</td>
+      <td>{{ user.firstname }}</td>
+    </tr>
+    <tr>
+      <td>Last Name</td>
+      <td>{{ user.lastname }}</td>
+    </tr>
+    <tr>
+      <td>Phone</td>
+      <td>{{ user.phone }}</td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td>{{ user.email }}</td>
+    </tr>
+    <tr>
+      <td>Admin</td>
+      <td>{{ user.isAdmin }}</td>
+    </tr>
+    <tr>
+      <td>Reviewer</td>
+      <td>{{ user.isReviewer }}</td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <a routerLink='/user/edit/{{user.id}}' class='btn btn-primary' title='Edit' style='margin-right: 5px'>Edit</a>
+        <!-- <a *ngIf='loggedInUser.admin || loggedInUser.userName == user.userName' routerLink='/user/edit/{{user.id}}' class='btn btn-primary' title='Edit' style='margin-right: 5px'>Edit</a> -->
+        <button (click)="remove()" class='btn btn-danger' title='Delete'>Remove</button>
+        <!-- <button *ngIf='loggedInUser.admin' (click)="remove()" class='btn btn-danger' title='Delete'>Remove</button> -->
+
+      </td>
+    </tr>
+  </table>
+</div>
