@@ -11,7 +11,7 @@ import { FormsModule} from '@angular/forms';
 })
 export class UserCreateComponent implements OnInit {
   user: User = new User();
-  title: string = 'User-Create';
+  title: string = 'User Create';
 
   constructor(private userSvc: UserService,
               private router: Router) { }
@@ -22,6 +22,7 @@ export class UserCreateComponent implements OnInit {
   create() {
     this.userSvc.create(this.user).subscribe( resp => {
         //success
+        alert('User '+this.user.firstname+' '+this.user.lastname+ ' successfully created!');
         console.log(resp);
         this.router.navigateByUrl('/user/list');
     },

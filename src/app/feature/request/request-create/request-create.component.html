@@ -1,0 +1,60 @@
+<div class='component-content'>
+        <div>
+          <span class='component-title'>[{{title}}] | </span>
+          | <span><a routerLink='/request/create'>New Request</a></span>
+          <span><a routerLink='/request/list'>Back to list</a></span>
+        </div>
+        <p *ngIf='undefined'>Loading ...</p>
+
+
+
+
+          <div class="form-group row">
+            <label class='col-form-label col-sm-2' for="description">Description:</label>
+            <input [(ngModel)]='request.description' name='description' type="text" class="form-control col-sm-6"
+              id="description" aria-describedby="descriptionHelp" placeholder="description">
+            <small id="descriptionHelp" class="form-text text-muted col-sm-2">Request Description</small>
+          </div>
+          <div class="form-group row">
+              <label class='col-form-label col-sm-2' for="justification">Justification:</label>
+              <input [(ngModel)]='request.justification' name='justification' type="text" class="form-control col-sm-6" id="justification"
+                aria-describedby="justificationHelp" placeholder="justification">
+              <small id="totalHelp" class="form-text text-muted col-sm-2">Request justification</small>
+            </div>
+            <div class="form-group row">
+                <label class='col-form-label col-sm-2' for="deliveryMode">Delivery Mode:</label>
+                <input [(ngModel)]='request.deliveryMode' name='description' type="text" class="form-control col-sm-6"
+                  id="deliveryMode" aria-describedby="deliveryModeHelp" placeholder="deliveryMode">
+                <small id="deliveryModeHelp" class="form-text text-muted col-sm-2">Request Delivery Mode</small>
+              </div>
+
+              <div class="form-group row">
+                  <label class='col-form-label col-sm-2' for="status">Status:</label>
+                  <input [(ngModel)]='request.status' name='status' type="text" class="form-control col-sm-6" id="status"
+                    aria-describedby="statusHelp" placeholder="status">
+                  <small id="statusHelp" class="form-text text-muted col-sm-2">Request status</small>
+                </div>
+
+
+
+                
+                <div *ngIf='request'>
+                    <div class='form-group row'>
+                      <label class='col-form-label col-sm-2' for="username">userId:</label>
+                      <div class=' col-sm-6'>
+                        <select [(ngModel)]='request.user' class='form-control' name='user' id='user'>
+                          <option *ngFor="let user of users" [ngValue]="user">{{user.username}}</option>
+                        </select>
+                      </div>
+                    </div>
+          <div class="form-group row">
+            <label class='col-form-label col-sm-2' for="total">Total:</label>
+            <input [(ngModel)]='request.total' name='total' type="text" class="form-control col-sm-6" id="total"
+              aria-describedby="totalHelp" placeholder="total">
+            <small id="totalHelp" class="form-text text-muted col-sm-2">Request Total</small>
+          </div>
+          <div class='form-group'>
+            <button (click)='create()' class='btn btn-primary'>Create</button>
+          </div>
+        </div>
+      </div>

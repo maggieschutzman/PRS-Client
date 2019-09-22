@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Vendor } from '@model/vendor';
+import { Vendor } from '@model/vendor.class';
 import { VendorService } from '@svc/vendor.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class VendorEditComponent implements OnInit {
 vendor: Vendor = new Vendor();
-title: string = 'Vendor-Edit';
+title: string = 'Vendor Edit';
 
   constructor(private vendorSvc: VendorService,
     private router: Router,

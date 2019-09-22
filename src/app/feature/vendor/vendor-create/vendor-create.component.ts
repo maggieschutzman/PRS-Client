@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Vendor } from '@model/vendor';
+import { Vendor } from '@model/vendor.class';
 import { Router } from '@angular/router';
 import { FormsModule} from '@angular/forms';
 import { VendorService } from '@svc/vendor.service';
@@ -12,7 +12,7 @@ import { VendorService } from '@svc/vendor.service';
 
 export class VendorCreateComponent implements OnInit {
 vendor: Vendor = new Vendor();
-title: string = 'Vendor-Create';
+title: string = 'Vendor Create';
 
   constructor(private vendorSvc: VendorService,
               private router: Router) { }
@@ -22,8 +22,9 @@ title: string = 'Vendor-Create';
   create() {
     this.vendorSvc.create(this.vendor).subscribe( resp => {
         //success
+        alert('Vendor '+this.vendor.name+ ' successfully created!');
         console.log(resp);
-        this.router.navigateByUrl('vendors/create');
+        this.router.navigateByUrl('vendors/list');
     },
     err => {
       //error

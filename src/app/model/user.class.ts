@@ -23,5 +23,5 @@ export class User {
                     this.isReviewer = isReviewer;
                     this.isAdmin = isAdmin;
 
-                }
+    }
 }

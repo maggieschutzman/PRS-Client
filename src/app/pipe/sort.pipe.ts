@@ -10,6 +10,7 @@ export class SortPipe implements PipeTransform {
     const column = args;
 
     return arrObjects.sort((a, b) => {
+
       let result = 0;
       if (a[column] > b[column]) {
         result = 1;

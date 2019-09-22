@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 export class UserDetailComponent implements OnInit {
   user: User = new User();
-  title: string = 'User-Detail';
+  title: string = 'User Detail';
 
   
   constructor(private userSvc: UserService,

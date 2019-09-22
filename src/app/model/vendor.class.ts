@@ -23,5 +23,5 @@ export class Vendor {
                     this.phone = phone;
                     this.email = email;
 
-                }
+    }
 }

@@ -1,0 +1,60 @@
+<div class='component-content'>
+    <div class='lefthalf'>
+      <span class='component-title'>[{{title}}] </span>
+      <!-- <span *ngIf='loggedInUser.admin'><a routerLink='/product/create'> -->
+      <span><a routerLink='/request/create'>
+          <img id='createnew' width='20' height='20' src='assets/add-icon.png' title='Add New'></a>
+      </span>
+    </div>
+  </div>
+  <p *ngIf='!requests'>Loading ...</p>
+  <table class="table table-sm" *ngIf='requests'>
+    <tr>
+      <th class='table-secondary'></th>
+
+      <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold"
+          (click)="sortBy('id')"><u>Id</u></a></th>
+
+      <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold"
+          (click)="sortBy('description')"><u>Description</u></a></th>
+
+      <!-- <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold"
+          (click)="sortBy('justification')"><u>Justification</u></a></th> -->
+
+      <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold"
+          (click)="sortBy('deliveryMode')"><u>Delivery Mode</u></a></th>
+
+      <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold"
+          (click)="sortBy('status')"><u>Status</u></a></th>
+
+      <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold"
+          (click)="sortBy('total')"><u>Total</u></a></th>
+
+      <th class="table-secondary btn-link"><a class="btn btn-link font-weight-bold"
+          (click)="sortBy('user')"><u>Is Administrator</u></a></th>
+
+
+      <th class="table-secondary btn-link"><a class='btn btn-link font-weight-bold'>Action</a></th>
+            </tr>
+
+    <tr *ngFor='let request of requests | sort:sortCriteria:sortOrder'>
+         <td></td>
+          <td>{{request.id}}</td>
+          <td>{{request.description}}</td>
+          <td>{{request.deliveryMode}}</td>
+          <td>{{request.status}}</td>
+          <td>{{request.total | currency}} </td>
+          <td>{{request.user.isAdmin}}</td>
+         
+
+              <td class='actions'>
+                <a routerLink='/request/detail/{{request.id}}' style='padding-left: 16px' class='actionIcon'><img
+                    src='assets/details.png' width='20' height='20' title='Detail'></a>
+                <!-- <a *ngIf='loggedInUser.admin' routerLink='/product/edit/{{product.id}}' class='actionIcon'><img -->
+                <a routerLink='/request/edit/{{request.id}}' class='actionIcon'><img
+                    src='assets/pencil-icon.png' width='20' height='20' title='Edit'></a>
+              </td>
+            </tr>
+          </table>
+          
+  

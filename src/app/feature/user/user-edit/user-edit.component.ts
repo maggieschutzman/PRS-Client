@@ -11,7 +11,7 @@ import { User } from '@model/user.class';
 
 export class UserEditComponent implements OnInit {
   user: User = new User();
-  title: string = 'User-Edit';
+  title: string = 'User Edit';
   
   constructor(private userSvc: UserService,
     private router: Router,
