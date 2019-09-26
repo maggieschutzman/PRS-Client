@@ -1,13 +1,14 @@
 
 <div class='component-content'>
         <div>
-          <span class='component-title'>[{{title}}]</span>
+          <span class='component-title'>{{title}}</span>
         </div>
         <p *ngIf='!request'>Loading...</p>
-      
+      <p *ngIf='loggedInUser.isAdmin !== true'>You must be an admin.</p>
+      <div *ngIf='loggedInUser.isAdmin == true'>
         <div *ngIf='request'>
          
-          <hr />
+          <hr/>
 
           <div class="form-group row">
             <label class='col-form-label col-sm-2' for="description">Description:</label>
@@ -15,60 +16,55 @@
               aria-describedby="description" placeholder="description">
             <small id="description" class="form-text text-muted col-sm-2">Description</small>
           </div>
-          <hr />
+          <hr/>
           <div class="form-group row">
             <label class='col-form-label col-sm-2' for="justifictation">Justification:</label>
             <input [(ngModel)]='request.justifictation' name='justifictation' type="text" class="form-control col-sm-6" id="justifictation"
               aria-describedby="justifictationHelp" placeholder="justifictation">
             <small id="justifictationHelp" class="form-text text-muted col-sm-2">Justification</small>
           </div>
-          <hr />
+          <hr/>
           <div class="form-group row">
             <label class='col-form-label col-sm-2' for="rejectionReason">Rejection Reason:</label>
             <input [(ngModel)]='request.rejectionReason' name='rejectionReason' type="text" class="form-control col-sm-6" id="rejectionReason"
               aria-describedby="rejectionReasonHelp" placeholder="Rejection Reason">
             <small id="rejectionReasonHelp" class="form-text text-muted col-sm-2">Rejection Reason</small>
           </div>
-          <hr />
+          <hr/>
           <div class="form-group row">
             <label class='col-form-label col-sm-2' for="deliveryMode">Delivery Mode:</label>
             <input [(ngModel)]='request.deliveryMode' name='delivery mode' type="text" class="form-control col-sm-6" id="deliveryMode"
               aria-describedby="deliveryModeHelp" placeholder="delivery mode">
             <small id="deliveryModeHelp" class="form-text text-muted col-sm-2">Delivery Mode</small>
           </div>
-          <hr />
+          <hr/>
           <div class="form-group row">
             <label class='col-form-label col-sm-2' for="status">Status:</label>
             <input [(ngModel)]='request.status' name='status' type="text" class="form-control col-sm-6" id="status"
               aria-describedby="statusHelp" placeholder="status">
             <small id="statusHelp" class="form-text text-muted col-sm-2">Request Status</small>
           </div>
-          <hr />
+          <hr/>
           <div class="form-group row">
             <label class='col-form-label col-sm-2' for="total">Total:</label>
             <input [(ngModel)]='request.total' name='total' type="text" class="form-control col-sm-6" id="total"
               aria-describedby="totalHelp" placeholder="total">
             <small id="totalHelp" class="form-text text-muted col-sm-2">Total</small>
           </div>
-          <!-- <hr />
-          <hr /> -->
-          <!-- <div class="form-group row">
-            <label class='col-form-label col-sm-2' for="userId">User Id:</label>
-            <input [(ngModel)]='request.user.userId' name='status' type="text" class="form-control col-sm-6" id="userId"
-              aria-describedby="userIdHelp" placeholder="userId">
-            <small id="userIdHelp" class="form-text text-muted col-sm-2">Request User Id</small>
-          </div> -->
-          <hr />
+
+          <hr/>
           <div class="form-group row">
             <label class='col-form-label col-sm-2' for="user">User:</label>
             <input [(ngModel)]='request.user.firstname' name='user' type="text" class="form-control col-sm-6" id="user"
               aria-describedby="userHelp" placeholder="user">
             <small id="userHelp" class="form-text text-muted col-sm-2">Request's User</small>
           </div>
-          <hr />
+          <hr/>
           <div class='form-group'>
             <button (click)='edit()' class='btn btn-primary'>Update</button>
           </div>
         </div>
-      </div>
+        </div>
+        </div>
+  
       

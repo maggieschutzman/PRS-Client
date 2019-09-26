@@ -1,0 +1,69 @@
+<div class='component-content'>
+  <div>
+    <span class='component-title'>[{{title}}]</span>
+    <span><a routerLink='/request/list'>Back to list</a></span> 
+  </div>
+
+  <!-- <p *ngIf='!request'>Loading ...</p>
+  <div *ngIf='request'> -->
+    <table class='table table-sm'>
+        <tr>
+            <th>ID:</th>
+            <th>Description:</th>
+            <th>Status:</th>
+            <th>Total:</th>
+        </tr>
+        <tr>
+            <td>{{request.id}}</td>
+            <td>{{request.description}}</td>
+            <td>{{request.status}}</td>
+            <td>{{request.total | currency}}</td>
+        </tr>
+    </table>
+    </div>
+
+    <table *ngIf='requestlines' class="table table-sm" >
+    <tr>
+        <span class='component-title'>[RequestLines]</span>
+        <a routerLink='/requestlines/create/{{request.id}}'>
+        <img src='assets/add-icon.png' width='20' height='20'></a> 
+    </tr>
+     
+      <tr><b>
+        <th>ID:</th>
+        <th>Request ID:</th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Line Total</th>
+        <th>Action</th></b>
+      </tr>
+    
+    <tr *ngIf='requestlines.length==0' class="table-danger">
+       <td colspan=6>No line items yet.</td>
+    </tr>
+     
+<tr *ngFor='let requestline of requestlines'>
+
+      <td *ngIf='requestline.request.id == request.id'>{{requestline.id}}</td>
+      <td *ngIf='requestline.request && requestline.request.id == request.id'>{{requestline.request.id}}</td>
+      <td *ngIf='requestline.product && requestline.request.id == request.id'>{{requestline.product.name}}</td>
+      <td *ngIf='requestline.quantity && requestline.request.id == request.id'>{{requestline.quantity}}</td>
+      <td *ngIf='requestline.product && requestline.request.id == request.id'>{{requestline.product.price | currency}}</td>
+      <td *ngIf='requestline.product && requestline.request.id == request.id'>{{requestline.product.price * requestline.quantity | currency}}</td>
+      
+      <td *ngIf='requestline.request.id == request.id' class='actions'>
+
+            <a routerLink='/requestline/edit/{{requestline.id}}'>
+              <img width='20' height='20' src='assets/pencil-icon.png'></a>
+
+            <button (click)='delete()'></button>
+     </td>
+</tr>
+      </table>
+
+    <div *ngIf="requestlines && requestlines.length > 0" class='form-group'>
+      <button (click)='submitForReview()' class='btn btn-primary'>Submit For Review</button>
+    </div>
+
+

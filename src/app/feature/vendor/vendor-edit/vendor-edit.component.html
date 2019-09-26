@@ -3,6 +3,8 @@
           <span>[{{title}}]</span>
         </div>
         <p *ngIf='!vendor'>Loading...</p>
+        <p *ngIf='loggedInUser.isAdmin !== true'>You must be an admin.</p>
+        <div *ngIf='loggedInUser.isAdmin == true'>
         <div *ngIf='vendor'>
       ​
           <div class="form-group row">

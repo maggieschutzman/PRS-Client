@@ -1,0 +1,30 @@
+<div>
+    <div>
+    <span>{{title}}</span>
+    </div>
+        <div>
+            <span><a routerLink='/request/list'>Back to list</a></span>
+        </div> 
+
+          <div>
+             <label for="Product">Product:</label>
+          <div>
+                <select [(ngModel)]='product' class='form-control' name='product' id='product'>
+                <option *ngFor="let product of products" [ngValue]="product">{{product.name}}</option>
+                </select>
+          </div>
+          </div>
+ 
+          <div>
+            <label for="requestquantity">Quantity:</label>
+            <input [(ngModel)]='reqline.quantity' name='quantity' type="number" class="form-control col-sm-6" id="requestquantity" aria-describedby="qtyHelp" placeholder="Quantity">
+            <small id="qtyHelp" class="form-text text-muted col-sm-2">The Quantity</small>
+          </div>
+
+          <div>
+              <button (click)='create()' class='btn btn-primary'>Create</button>
+          </div>
+          <div>
+            <label>{{message}}</label>
+     </div>
+</div>

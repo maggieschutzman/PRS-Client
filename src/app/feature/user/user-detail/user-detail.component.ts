@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '@model/user.class';
 import { UserService } from '@svc/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SystemService } from '@svc/system.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -15,12 +16,11 @@ export class UserDetailComponent implements OnInit {
 
   
   constructor(private userSvc: UserService,
+    private systemSvc: SystemService,
     private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    //get the id from the request,
-    //get the associated user record
     this.route.params.subscribe(parms => {
       this.userSvc.get(parms.id).subscribe(resp => {
         this.user = resp as User;
@@ -31,14 +31,13 @@ export class UserDetailComponent implements OnInit {
 
   remove() {
     this.userSvc.delete(this.user.id).subscribe(resp => {
-      alert('User '+this.user.username+ ' successfully deleted!');
-      this.router.navigateByUrl('/user/list');
+    console.log('User '+this.user.username+ ' successfully deleted!');
+    this.router.navigateByUrl('/user/list');
     },
     err => {
       console.log('error deleting user');
-      console.log(err);
     });
   }
-
-
 }
+
+

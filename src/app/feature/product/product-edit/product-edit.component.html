@@ -4,7 +4,8 @@
     <span class='component-title'>[{{title}}]</span>
   </div>
   <p *ngIf='!product'>Loading...</p>
-
+  <p *ngIf='loggedInUser.isAdmin !== true'>You must be an admin.</p>
+  <div *ngIf='loggedInUser.isAdmin == true'>
   <div *ngIf='product'>
     <hr />
     <div class="form-group row">

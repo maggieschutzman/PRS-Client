@@ -3,6 +3,8 @@
     <span>[{{title}}]</span>
   </div>
   <p *ngIf='!user'>Loading...</p>
+  <p *ngIf='loggedInUser.isAdmin !== true'>You must be an admin.</p>
+  <div *ngIf='loggedInUser.isAdmin == true'>
   <div *ngIf='user'>
 ​
     <div class="form-group row">
@@ -57,4 +59,5 @@
       <button (click)='create();' class='btn btn-primary'>Create</button>
     </div>
   </div>
+</div>
 </div>

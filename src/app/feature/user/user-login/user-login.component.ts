@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { UserService } from '@svc/user.service';
 import { SystemService } from '@svc/system.service';
 import { User } from '@model/user.class';
+import { Request } from '@model/request.class';
+
 
 @Component({
   selector: 'app-user-login',
@@ -14,27 +16,23 @@ export class UserLoginComponent implements OnInit {
   message: any;
   user: User = new User(0, '', '', '', '', '', '', false, false);
 
-  constructor(private userSvc: UserService, private sysSvc: SystemService,
-    private router: Router) { }
+  constructor(private userSvc: UserService, 
+              private sysSvc: SystemService,
+              private router: Router) { }
+
+              ngOnInit() {
+              }
 
   login() {
-    this.userSvc.login(this.user.username, this.user.password).subscribe(resp => {
+    this.userSvc.login(this.user.username, this.user.password)
+     .subscribe(resp => {
         this.user = resp as User;
-        this.sysSvc.data.user.instance = this.user;
-        this.sysSvc.data.user.loggedIn = true;
+        this.sysSvc.setLoggedInUser(this.user);
+        console.log("You're now logged in "+this.user.username);
         this.router.navigateByUrl('/user/list');
-
-    },
+      },
       err => {
         this.message = 'login authentication issue';
       }
     );
-  }
-
-
-
-  ngOnInit() {
-    this.user.password = 'password';
-  }
-
-}
+  }}

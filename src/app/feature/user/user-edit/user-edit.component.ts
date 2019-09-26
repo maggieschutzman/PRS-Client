@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '@svc/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '@model/user.class';
+import { SystemService } from '@svc/system.service';
 
 @Component({
   selector: 'app-user-edit',
@@ -14,31 +15,29 @@ export class UserEditComponent implements OnInit {
   title: string = 'User Edit';
   
   constructor(private userSvc: UserService,
+    private systemSvc: SystemService,
     private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    //get the user id from the request, 
-    //get user from database
     this.route.params.subscribe(parms => {
-      this.userSvc.get(parms.id).subscribe(resp => {
-        this.user = resp as User;
-        console.log('user edit: '+this.user.id);
+    this.userSvc.get(parms.id).subscribe(resp => {
+    this.user = resp as User;
+    console.log('user edit: '+this.user.id);
       })
     });
   }
 
   edit() {
     this.userSvc.edit(this.user).subscribe( resp => {
-        //success
-        console.log(resp);
-        this.router.navigateByUrl('/user/list');
+    console.log(resp);
+    this.router.navigateByUrl('/user/list');
     },
     err => {
       //error
       console.log(err)
     });
   }
-
 }
+
 

@@ -4,6 +4,9 @@ import { UserService } from '@svc/user.service';
 import { Router } from '@angular/router';
 import { Request } from '@model/request.class';
 import { User } from '@model/user.class';
+import { SystemService } from '@svc/system.service';
+import { ProductService } from '@svc/product.service';
+import { Product } from '@model/product.class';
 
 @Component({
   selector: 'app-request-create',
@@ -13,37 +16,38 @@ import { User } from '@model/user.class';
 
 export class RequestCreateComponent implements OnInit {
   title = 'Request Create';
-  user: User = new User(0, '', '', '', '', '', '', false,false);
-  request: Request = new Request(0,'','','','','',0,0,this.user);
-  users: User[] = [this.user];
-  loggedinUser: User;
+  resp: any;
+  User: User;
+  loggedInUser : User;
+  product: Product;
+  products: Product[];
 
+  request: Request = new Request();
 
-   
   constructor(private requestSvc: RequestService, 
+                  private systemSvc: SystemService,
                   private userSvc: UserService,
+                  private productSvc: ProductService,
                   private router: Router) { }
 
-  ngOnInit() {
-    this.userSvc.list()
-      .subscribe(resp => {
-        this.users = resp as User[];
-      });
-  }
+  ngOnInit() { 
+    this.loggedInUser = this.systemSvc.getLoggedInUser();
+    console.log("Logged in user is: ", this.loggedInUser);
+    this.request.userId = this.loggedInUser.id;
+  
+    if (this.loggedInUser.isAdmin!==true) {
+      console.log("YOU MUST BE AN ADMIN")
+     }
+
+    }
+  
 
   create() {
-    this.request.userId = this.request.user.id;
-    this.request.user=null;
-    console.log(this.request);
+
     this.requestSvc.create(this.request).subscribe(resp => {
-      alert('Request successfully created!');
-      this.request = resp as Request;
-      this.router.navigate(['request/list']);
+    this.request = resp});
+    this.router.navigate(['request/list']);
+    console.log('Request successfully created!');
     }
-    ,
-    err => {
-      console.log(err);
-    }
-    );
-  }
+    
 }

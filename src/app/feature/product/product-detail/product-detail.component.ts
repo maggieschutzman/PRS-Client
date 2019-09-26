@@ -18,8 +18,7 @@ export class ProductDetailComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    //get the id from the request,
-    //get the associated vendor record
+
     this.route.params.subscribe(parms => {
       this.productSvc.get(parms.id).subscribe(resp => {
         this.product = resp as Product;
@@ -29,7 +28,7 @@ export class ProductDetailComponent implements OnInit {
   }
   remove() {
     this.productSvc.delete(this.product.id).subscribe(resp => {
-      alert('Product '+this.product.name+ ' successfully deleted!');
+      console.log('Product '+this.product.name+ ' successfully deleted!');
       this.router.navigateByUrl('/product/list');
     },
     err => {

@@ -10,18 +10,15 @@ export class Vendor {
     phone: string;
     email: string;
 
-    constructor(id:number = 0, code: string = '', name:string = '',
-                address: string = '', city: string = '', state: string = '', zip: number = 0,
-                phone: string = '', email: string = '') {
-                    this.id = id;
-                    this.code = code;
-                    this.name = name;
-                    this.address = address;
-                    this.city = city;
-                    this.state = state;
-                    this.zip = zip;
-                    this.phone = phone;
-                    this.email = email;
-
+    constructor() {
+       this.id - 0;
+       this.code = '';
+       this.name = '';
+       this.address='';
+       this.city = '';
+       this.state = '';
+       this.zip = 0;
+       this.phone = '';
+       this.email = '';
     }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Vendor } from '@model/vendor.class';
 import { VendorService } from '@svc/vendor.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SystemService } from '@svc/system.service';
 
 @Component({
   selector: 'app-vendor-detail',
@@ -14,30 +15,27 @@ export class VendorDetailComponent implements OnInit {
 
   
   constructor(private vendorSvc: VendorService,
+    private systemSvc: SystemService,
     private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    //get the id from the request,
-    //get the associated vendor record
     this.route.params.subscribe(parms => {
-      this.vendorSvc.get(parms.id).subscribe(resp => {
-        this.vendor = resp as Vendor;
-        console.log('vendor detail'+this.vendor.id);
+    this.vendorSvc.get(parms.id).subscribe(resp => {this.vendor = resp as Vendor;
+    console.log('vendor detail'+this.vendor.id);
       })
     });
   }
 
   remove() {
     this.vendorSvc.delete(this.vendor.id).subscribe(resp => {
-      alert('Vendor '+this.vendor.name+ ' successfully deleted!');
-      this.router.navigateByUrl('/vendor/list');
+    console.log('Vendor '+this.vendor.name+ ' successfully deleted!');
+    this.router.navigateByUrl('/vendor/list');
     },
     err => {
-      console.log('error vendor user');
-      console.log(err);
+    console.log('error vendor user');
+    console.log(err);
     });
   }
-
-
 }
+

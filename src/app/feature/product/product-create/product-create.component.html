@@ -1,17 +1,19 @@
 <div class='component-content'>
   <div>
-    <span class='component-title'>[{{title}}] | </span>
+    <span class='component-title'>{{title}} </span>
     <!-- | <span><a routerLink='/product/create'>New Product</a></span> -->
     <span><a routerLink='/product/list'>Back to list</a></span>
   </div>
+  <p *ngIf='loggedInUser.isAdmin !== true'>You must be an admin.</p>
+  <div *ngIf='loggedInUser.isAdmin == true'>
   <p *ngIf='undefined'>Loading ...</p>
 
   <div *ngIf='product'>
     <div class='form-group row'>
       <label class='col-form-label col-sm-2' for="vendor">Vendor:</label>
       <div class=' col-sm-6'>
-        <select [(ngModel)]='product.vender' class='form-control' name='Vendor' id='vendor'>
-          <option *ngFor="let vendor of vendors" [ngValue]="vendor">{{vendor.name}}</option>
+        <select [(ngModel)]='product.vendorId' class='form-control' name='Vendor' id='vendor'>
+          <option *ngFor="let vendor of vendors" [ngValue]="vendor.id">{{vendor.name}}</option>
         </select>
       </div>
     </div>

@@ -2,39 +2,44 @@ import { Component, OnInit } from '@angular/core';
 import { Vendor } from '@model/vendor.class';
 import { VendorService } from '@svc/vendor.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SystemService } from '@svc/system.service';
+import { User } from '@model/user.class';
 
 @Component({
   selector: 'app-vendor-edit',
   templateUrl: './vendor-edit.component.html',
   styleUrls: ['./vendor-edit.component.css']
 })
+
 export class VendorEditComponent implements OnInit {
 vendor: Vendor = new Vendor();
 title: string = 'Vendor Edit';
+loggedInUser: User;
 
   constructor(private vendorSvc: VendorService,
+    private systemSvc: SystemService,
     private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    //get the user id from the request, 
-    //get user from database
+    this.loggedInUser = this.systemSvc.getLoggedInUser();
+    console.log("Logged in user is: ", this.loggedInUser);
+    if(this.loggedInUser.isAdmin == true) {
     this.route.params.subscribe(parms => {
-      this.vendorSvc.get(parms.id).subscribe(resp => {
-        this.vendor = resp as Vendor;
-        console.log('vendor edit: '+this.vendor.id);
+    this.vendorSvc.get(parms.id).subscribe(resp => {
+    this.vendor = resp as Vendor;
+    console.log('vendor edit: '+this.vendor.id);
       })
     });
   }
+  }
   edit() {
     this.vendorSvc.edit(this.vendor).subscribe( resp => {
-        //success
-        console.log(resp);
-        this.router.navigateByUrl('/vendor/list');
+    console.log(resp);
+    this.router.navigateByUrl('/vendor/list');
     },
     err => {
-      //error
-      console.log(err)
+    console.log(err)
     });
   }
 }

@@ -4,39 +4,43 @@ import { Product } from '@model/product.class';
 import { ProductService } from '@svc/product.service';
 import { Vendor } from '@model/vendor.class';
 import { VendorService } from '@svc/vendor.service';
+import { SystemService } from '@svc/system.service';
+import { User } from '@model/user.class';
 
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.css']
 })
+
 export class ProductCreateComponent implements OnInit {
   title = 'Product Create';
-  vendor: Vendor = new Vendor(0, '', 'Loading...', '', '', '', 0, '');
-  product: Product = new Product(0, '', '', 0, '', '', 0, this.vendor,);
-  vendors: Vendor[] = [this.vendor];
+  product: Product = new Product();
+  vendors: Vendor[];
+  loggedInUser: User;
+ vendorid: Vendor['id'];
+  vendor: Vendor;
 
-  constructor(private prodSvc: ProductService, private vndrSvc: VendorService,
+  constructor(private prodSvc: ProductService, 
+              private vndrSvc: VendorService,
+              private systemSvc: SystemService,
               private router: Router) { }
 
   ngOnInit() {
+    this.loggedInUser = this.systemSvc.getLoggedInUser();
+    console.log("Logged in user is: ", this.loggedInUser);
+    if(this.loggedInUser.isAdmin==true) {
     this.vndrSvc.list().subscribe(resp => {
-      this.vendors = resp as Vendor[];
+    this.vendors = resp as Vendor[];
     });
   }
+}
 
   create() {
-    this.product.vendorId = this.product.vendor.id;
-    this.product.vendor = null;
-    console.log(this.product);
-    this.prodSvc.create(this.product).subscribe(
-      resp => {
-      alert('Product '+this.product.name+ ' successfully created!');
-      this.product = resp as Product;
+    this.prodSvc.create(this.product).subscribe(resp => {
+      this.product = resp});
       this.router.navigate(['product/list']);
-    },
-    err => {
-      console.log(err);
-    });
+      console.log('Product successfully created!');
+
   }
 }

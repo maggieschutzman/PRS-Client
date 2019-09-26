@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome",
-            "url": "http://localhost:4200/request/create",
+            "url": "http://localhost:4200/requestline/list",
             "webRoot": "${workspaceFolder}"
         },
         {
@@ -22,7 +22,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://localhost:4200/request/create",
+            "url": "http://localhost:4200/requestline/list",
             "webRoot": "${workspaceFolder}"
         }
     ]

@@ -1,0 +1,38 @@
+<div class='component-content'>
+  <div>
+      <span class='component-title'>{{title}}</span>
+</div>
+        <table class='table table-sm'>
+         <tr>
+                <th class="table-secondary btn-link">Id:</th>
+                <th class="table-secondary btn-link">Description:</th>
+                <th class="table-secondary btn-link">Delivery Mode:</th>
+                <th class="table-secondary btn-link">Status:</th>
+                <th class="table-secondary btn-link">Total:</th>
+                <th class="table-secondary btn-link">Is Administator:</th>
+                <th class="table-secondary btn-link">Action</th>
+        
+    
+  <tr *ngFor='let request of requests'>
+
+              <td *ngIf='request.status == "REVIEW"'>{{request.id}}</td>
+              <td *ngIf='request.status == "REVIEW"'>{{request.description}}</td>
+              <td *ngIf='request.status == "REVIEW"'>{{request.deliveryMode}}</td>
+              <td *ngIf='request.status == "REVIEW"'>{{request.status}}</td>
+              <td *ngIf='request.status == "REVIEW"'>{{request.total | currency}}</td>
+              <td *ngIf='request.status == "REVIEW"'>{{request.user.isAdmin}}</td>
+            
+         <div *ngIf='request.status == "REVIEW"' class='form-group'> 
+          <a routerLink='/request/approve/{{request.id}}' class='btn btn-primary'>Review</a>
+         </div>
+              
+            </table>
+          </div>
+                            
+              
+
+        
+
+               
+
+        

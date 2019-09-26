@@ -19,25 +19,21 @@ export class UserListComponent implements OnInit {
               private sysSvc : SystemService) { }
 
   ngOnInit() {
-    //check sys service for logged in user
-    this.loggedInUser = this.sysSvc.data.user.instance;
-   console.log("loggedInUser = "+this.loggedInUser.username);
-    // populate list of users
-    this.userSvc.list().subscribe(
-      resp => {
-        this.users = resp;
-        console.log(this.users);
+    this.userSvc.list().subscribe(resp => {
+    this.users = resp;
+    console.log(this.users);
       }
     );
   }
+
+
 sortBy(column: string): void {
 if( this.sortCriteria == column) {
-this.sortOrder = (this.sortOrder === 'asc' ? 'desc' : 'asc'); }
+  this.sortOrder = (this.sortOrder === 'asc' ? 'desc' : 'asc'); }
 else {
   this.sortCriteria = column;
   this.sortOrder = 'asc';
     }
-
   }
 }
 
